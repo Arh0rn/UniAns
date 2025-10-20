@@ -5,7 +5,7 @@ A Chrome extension that uses OpenAI's API to quickly get answers for selected te
 ## Features
 
 -   🔥 Quick answers via keyboard shortcut (Alt+Shift+A)
--   🤖 Multiple AI providers (OpenAI & Google Gemini)
+-   🤖 Multiple AI providers (OpenAI for now)
 -   ⚙️ Configurable settings (API key, model, temperature, etc.)
 -   🎨 Customizable themes (Dark, Light, Blue, Green, Custom)
 -   🎯 Works on any webpage
@@ -14,7 +14,7 @@ A Chrome extension that uses OpenAI's API to quickly get answers for selected te
 ## Installation
 
 1. Clone or download this repository
-2. Open Chrome and go to `chrome://extensions/`
+2. Open Chrome and go to [chrome://extensions/shortcuts](chrome://extensions/shortcuts)
 3. Enable "Developer mode" (toggle in top right)
 4. Click "Load unpacked"
 5. Select the extension folder
@@ -25,7 +25,6 @@ A Chrome extension that uses OpenAI's API to quickly get answers for selected te
 2. Click the ⚙️ settings button
 3. Choose your AI provider:
     - **OpenAI**: Get API key from [platform.openai.com](https://platform.openai.com)
-    - **Google Gemini**: Get API key from [aistudio.google.com](https://aistudio.google.com)
 4. Configure other settings as needed:
     - **Model**: Choose your preferred model
     - **Temperature**: Control response creativity (0-2)
@@ -36,14 +35,14 @@ A Chrome extension that uses OpenAI's API to quickly get answers for selected te
 ## Usage
 
 1. Select any text on a webpage
-2. Press `Alt+Shift+A` (or click the extension icon)
-3. Get your answer instantly in the popup
+2. Press `Alt+Shift+X` (or click the extension icon)
+3. Select the text on any page and wait for the answer in popup.
 
 ## Configuration
 
-You can customize the keyboard shortcut:
+### You can customize the keyboard shortcut:
 
-1. Go to `chrome://extensions/shortcuts`
+1. Go to [chrome://extensions/shortcuts](chrome://extensions/shortcuts)
 2. Find "UniS Hotkey Answer"
 3. Set your preferred shortcut
 
@@ -62,12 +61,6 @@ You can customize the keyboard shortcut:
 -   GPT-4 Turbo
 -   GPT-4
 -   GPT-3.5 Turbo
-
-### Google Gemini
-
--   Gemini 1.5 Flash (Recommended)
--   Gemini 1.5 Pro
--   Gemini Pro
 
 ## Requirements
 
