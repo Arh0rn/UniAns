@@ -1,7 +1,8 @@
 const DEFAULT_SETTINGS = {
     provider: "openai",
     openaiApiKey: "",
-    openaiModel: "gpt-4o-mini",
+    openaiModel: "gpt-5-mini",
+    customModel: "",
     geminiApiKey: "",
     geminiModel: "gemini-1.5-flash",
     temperature: 0.7,
@@ -80,15 +81,27 @@ function toggleProviderSettings(provider) {
     const openaiSettings = document.getElementById("openaiSettings");
     const geminiSettings = document.getElementById("geminiSettings");
     const geminiWarning = document.getElementById("geminiWarning");
+    const pricingTable = document.getElementById("pricingTable");
 
     if (provider === "openai") {
         openaiSettings.style.display = "block";
         geminiSettings.style.display = "none";
         geminiWarning.style.display = "none";
+        pricingTable.classList.add("show");
     } else if (provider === "gemini") {
         openaiSettings.style.display = "none";
         geminiSettings.style.display = "block";
         geminiWarning.style.display = "block";
+        pricingTable.classList.remove("show");
+    }
+}
+
+function toggleCustomModel(modelValue) {
+    const customModelGroup = document.getElementById("customModelGroup");
+    if (modelValue === "custom") {
+        customModelGroup.style.display = "block";
+    } else {
+        customModelGroup.style.display = "none";
     }
 }
 
@@ -102,6 +115,7 @@ async function loadSettings() {
     }
     document.getElementById("openaiApiKey").value = settings.openaiApiKey;
     document.getElementById("openaiModel").value = settings.openaiModel;
+    document.getElementById("customModel").value = settings.customModel || "";
     document.getElementById("geminiApiKey").value = settings.geminiApiKey;
     document.getElementById("geminiModel").value = settings.geminiModel;
     document.getElementById("temperature").value = settings.temperature;
@@ -117,11 +131,16 @@ async function loadSettings() {
     }
 
     toggleProviderSettings(settings.provider);
+    toggleCustomModel(settings.openaiModel);
     applyTheme(settings.theme, settings.customBg, settings.customText);
 }
 
 document.getElementById("provider").addEventListener("change", (e) => {
     toggleProviderSettings(e.target.value);
+});
+
+document.getElementById("openaiModel").addEventListener("change", (e) => {
+    toggleCustomModel(e.target.value);
 });
 
 document.getElementById("theme").addEventListener("change", (e) => {
@@ -149,10 +168,17 @@ document
     .addEventListener("submit", async (e) => {
         e.preventDefault();
 
+        const modelSelect = document.getElementById("openaiModel").value;
+        const customModelInput = document
+            .getElementById("customModel")
+            .value.trim();
+
         const settings = {
             provider: document.getElementById("provider").value,
             openaiApiKey: document.getElementById("openaiApiKey").value.trim(),
-            openaiModel: document.getElementById("openaiModel").value,
+            openaiModel:
+                modelSelect === "custom" ? customModelInput : modelSelect,
+            customModel: customModelInput,
             geminiApiKey: document.getElementById("geminiApiKey").value.trim(),
             geminiModel: document.getElementById("geminiModel").value,
             temperature: parseFloat(
@@ -164,6 +190,19 @@ document
             customBg: document.getElementById("customBg").value,
             customText: document.getElementById("customText").value,
         };
+
+        if (modelSelect === "custom" && !customModelInput) {
+            const status = document.getElementById("status");
+            status.textContent = "Please enter a custom model name!";
+            status.className = "status";
+            status.style.display = "block";
+            status.style.backgroundColor = "#ffebee";
+            status.style.color = "#c62828";
+            setTimeout(() => {
+                status.style.display = "none";
+            }, 3000);
+            return;
+        }
 
         await chrome.storage.sync.set(settings);
 

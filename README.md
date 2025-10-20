@@ -5,7 +5,8 @@ A Chrome extension that uses OpenAI's API to quickly get answers for selected te
 ## Features
 
 -   🔥 Quick answers via keyboard shortcut (Alt+Shift+A)
--   🤖 Multiple AI providers (OpenAI for now)
+-   🤖 OpenAI integration with frontier models
+-   💰 Built-in pricing table for all models
 -   ⚙️ Configurable settings (API key, model, temperature, etc.)
 -   🎨 Customizable themes (Dark, Light, Blue, Green, Custom)
 -   🎯 Works on any webpage
@@ -54,18 +55,28 @@ A Chrome extension that uses OpenAI's API to quickly get answers for selected te
 
 ## Supported AI Providers
 
-### OpenAI
+### OpenAI (Active)
 
--   GPT-4o (Recommended)
--   GPT-4o Mini (Faster & Cheaper)
--   GPT-4 Turbo
--   GPT-4
--   GPT-3.5 Turbo
+The extension supports OpenAI's frontier models (recommended for most tasks):
+
+-   **gpt-5**: Best model for coding and agentic tasks across domains
+-   **gpt-5-mini**: Faster, cost-efficient version of GPT-5 for well-defined tasks
+-   **gpt-5-nano**: Fastest, most cost-efficient version of GPT-5
+-   **gpt-5-pro**: Version of GPT-5 that produces smarter and more precise responses
+-   **gpt-4.1**: Smartest non-reasoning model
+
+You can also use the "Custom Model" option to manually enter any OpenAI model name (e.g., gpt-4o, o1-pro, etc.).
+
+View detailed pricing for all models in the settings page.
+
+### Google Gemini (DEPRECATED)
+
+⚠️ **Note**: The Gemini provider is currently deprecated and not supported. Please use OpenAI.
 
 ## Requirements
 
 -   Chrome browser
--   API key from your chosen provider (OpenAI or Google Gemini)
+-   OpenAI API key from [platform.openai.com](https://platform.openai.com)
 
 ## License
 

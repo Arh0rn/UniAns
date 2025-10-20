@@ -5,19 +5,77 @@
     <title>Extension Settings</title>
     <style>
       body {
-        width: 400px;
         padding: 20px;
         font-family: Arial, sans-serif;
         display: flex;
         justify-content: center;
-        align-items: center;
+        align-items: flex-start;
         min-height: 100vh;
         margin: 0;
         transition: background-color 0.3s, color 0.3s;
+        gap: 20px;
+      }
+      .container {
+        display: flex;
+        gap: 20px;
+        max-width: 1200px;
+        width: 100%;
       }
       #settingsForm {
         width: 100%;
         max-width: 400px;
+        flex-shrink: 0;
+      }
+      #pricingTable {
+        flex: 1;
+        min-width: 400px;
+        display: none;
+      }
+      #pricingTable.show {
+        display: block;
+      }
+      .pricing-container {
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        padding: 15px;
+        background: rgba(0, 0, 0, 0.1);
+      }
+      .pricing-container h3 {
+        margin-top: 0;
+        font-size: 18px;
+        margin-bottom: 15px;
+      }
+      .pricing-table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 14px;
+      }
+      .pricing-table th,
+      .pricing-table td {
+        padding: 12px 16px;
+        text-align: left;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      }
+      .pricing-table th {
+        font-weight: bold;
+        background: rgba(0, 0, 0, 0.2);
+        position: sticky;
+        top: 0;
+      }
+      .pricing-table tr:hover {
+        background: rgba(255, 255, 255, 0.05);
+      }
+      .pricing-table tr.frontier-model {
+        background: rgba(100, 200, 100, 0.1);
+      }
+      .pricing-table tr.frontier-model:hover {
+        background: rgba(100, 200, 100, 0.15);
+      }
+      .pricing-note {
+        font-size: 12px;
+        margin-top: 15px;
+        opacity: 0.8;
+        line-height: 1.4;
       }
       h2 {
         margin-top: 0;
@@ -88,128 +146,225 @@
     </style>
   </head>
   <body>
-    <form id="settingsForm">
-      <h2>Extension Settings</h2>
-
-      <div class="form-group">
-        <label for="provider">AI Provider</label>
-        <select id="provider" required>
-          <option value="openai">OpenAI</option>
-          <option value="gemini">Google Gemini</option>
-        </select>
-        <div class="hint">Choose your AI provider</div>
-      </div>
-
-      <div id="openaiSettings" class="provider-settings">
-        <div class="form-group">
-          <label for="openaiApiKey">OpenAI API Key *</label>
-          <input type="password" id="openaiApiKey" placeholder="sk-proj-..." />
-          <div class="hint">Get your API key from platform.openai.com</div>
-        </div>
+    <div class="container">
+      <form id="settingsForm">
+        <h2>Extension Settings</h2>
 
         <div class="form-group">
-          <label for="openaiModel">Model</label>
-          <select id="openaiModel">
-            <option value="gpt-4o">GPT-4o (Recommended)</option>
-            <option value="gpt-4o-mini">GPT-4o Mini (Faster & Cheaper)</option>
-            <option value="gpt-4-turbo">GPT-4 Turbo</option>
-            <option value="gpt-4">GPT-4</option>
-            <option value="gpt-3.5-turbo">GPT-3.5 Turbo (Cheapest)</option>
-          </select>
-          <div class="hint">Choose based on your needs and budget</div>
-        </div>
-      </div>
-
-      <div id="geminiSettings" class="provider-settings" style="display: none">
-        <div class="form-group">
-          <label for="geminiApiKey">Gemini API Key *</label>
-          <input type="password" id="geminiApiKey" placeholder="AIza..." />
-          <div class="hint">Get your API key from aistudio.google.com</div>
-        </div>
-
-        <div class="form-group">
-          <label for="geminiModel">Model</label>
-          <select id="geminiModel">
-            <option value="gemini-1.5-flash">
-              Gemini 1.5 Flash (Recommended)
+          <label for="provider">AI Provider</label>
+          <select id="provider" required>
+            <option value="openai">OpenAI</option>
+            <option value="gemini">
+              Google Gemini (DEPRECATED - Not Supported)
             </option>
-            <option value="gemini-1.5-pro">Gemini 1.5 Pro</option>
-            <option value="gemini-pro">Gemini Pro</option>
           </select>
-          <div class="hint">Choose based on your needs</div>
+          <div class="hint">Choose your AI provider</div>
         </div>
-      </div>
 
-      <div
-        id="geminiWarning"
-        style="display: none; color: red; font-size: 12px; margin-bottom: 10px"
-      >
-        Note: The Gemini provider is currently deprecated and not supported.
-      </div>
+        <div id="openaiSettings" class="provider-settings">
+          <div class="form-group">
+            <label for="openaiApiKey">OpenAI API Key *</label>
+            <input
+              type="password"
+              id="openaiApiKey"
+              placeholder="sk-proj-..."
+            />
+            <div class="hint">Get your API key from platform.openai.com</div>
+          </div>
 
-      <div class="form-group">
-        <label for="temperature">Temperature (0-2)</label>
-        <input
-          type="number"
-          id="temperature"
-          min="0"
-          max="2"
-          step="0.1"
-          placeholder="0.7"
-          required
-        />
-        <div class="hint">
-          Higher values = more creative, lower = more focused
+          <div class="form-group">
+            <label for="openaiModel">Model</label>
+            <select id="openaiModel">
+              <option value="gpt-5">
+                GPT-5 - Best for coding and agentic tasks
+              </option>
+              <option value="gpt-5-mini">
+                GPT-5 Mini - Faster & cost-efficient
+              </option>
+              <option value="gpt-5-nano">
+                GPT-5 Nano - Fastest & most cost-efficient
+              </option>
+              <option value="gpt-5-pro">
+                GPT-5 Pro - Smarter and more precise
+              </option>
+              <option value="gpt-4.1">
+                GPT-4.1 - Smartest non-reasoning model
+              </option>
+              <option value="custom">Custom Model (enter manually)</option>
+            </select>
+            <div class="hint">Frontier models recommended for most tasks</div>
+          </div>
+
+          <div class="form-group" id="customModelGroup" style="display: none">
+            <label for="customModel">Custom Model Name</label>
+            <input
+              type="text"
+              id="customModel"
+              placeholder="e.g., gpt-4o, o1-pro, etc."
+            />
+            <div class="hint">Enter the exact model name from OpenAI</div>
+          </div>
         </div>
-      </div>
 
-      <div class="form-group">
-        <label for="maxTokens">Max Tokens</label>
-        <input
-          type="number"
-          id="maxTokens"
-          min="1"
-          max="4000"
-          placeholder="150"
-          required
-        />
-      </div>
+        <div
+          id="geminiSettings"
+          class="provider-settings"
+          style="display: none"
+        >
+          <div class="form-group">
+            <label for="geminiApiKey">Gemini API Key *</label>
+            <input type="password" id="geminiApiKey" placeholder="AIza..." />
+            <div class="hint">Get your API key from aistudio.google.com</div>
+          </div>
 
-      <div class="form-group">
-        <label for="promptPrefix">Prompt Prefix</label>
-        <textarea
-          id="promptPrefix"
-          placeholder="answer shortly A B C D: "
-        ></textarea>
-        <div class="hint">This text will be added before the selected text</div>
-      </div>
+          <div class="form-group">
+            <label for="geminiModel">Model</label>
+            <select id="geminiModel">
+              <option value="gemini-1.5-flash">
+                Gemini 1.5 Flash (Recommended)
+              </option>
+              <option value="gemini-1.5-pro">Gemini 1.5 Pro</option>
+              <option value="gemini-pro">Gemini Pro</option>
+            </select>
+            <div class="hint">Choose based on your needs</div>
+          </div>
+        </div>
 
-      <div class="form-group">
-        <label for="theme">Color Theme</label>
-        <select id="theme" required>
-          <option value="dark">Dark (Default)</option>
-          <option value="light">Light</option>
-          <option value="blue">Blue</option>
-          <option value="green">Green</option>
-          <option value="custom">Custom</option>
-        </select>
-        <div class="hint">Choose your preferred color scheme</div>
-      </div>
+        <div
+          id="geminiWarning"
+          style="
+            display: none;
+            background-color: #ffebee;
+            color: #c62828;
+            padding: 10px;
+            border-radius: 4px;
+            font-size: 12px;
+            margin-bottom: 15px;
+            border: 1px solid #ef5350;
+          "
+        >
+          ⚠️ <strong>DEPRECATED:</strong> The Gemini provider is currently not
+          supported and will not work. Please use OpenAI instead.
+        </div>
 
-      <div id="customColors" class="custom-colors" style="display: none">
         <div class="form-group">
-          <label for="customBg">Background Color</label>
-          <input type="color" id="customBg" value="#2d2550" />
+          <label for="temperature">Temperature (0-2)</label>
+          <input
+            type="number"
+            id="temperature"
+            min="0"
+            max="2"
+            step="0.1"
+            placeholder="0.7"
+            required
+          />
+          <div class="hint">
+            Higher values = more creative, lower = more focused
+          </div>
         </div>
+
         <div class="form-group">
-          <label for="customText">Text Color</label>
-          <input type="color" id="customText" value="#ffd016" />
+          <label for="maxTokens">Max Tokens</label>
+          <input
+            type="number"
+            id="maxTokens"
+            min="1"
+            max="4000"
+            placeholder="150"
+            required
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="promptPrefix">Prompt Prefix</label>
+          <textarea
+            id="promptPrefix"
+            placeholder="answer shortly A B C D: "
+          ></textarea>
+          <div class="hint">
+            This text will be added before the selected text
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="theme">Color Theme</label>
+          <select id="theme" required>
+            <option value="dark">Dark (Default)</option>
+            <option value="light">Light</option>
+            <option value="blue">Blue</option>
+            <option value="green">Green</option>
+            <option value="custom">Custom</option>
+          </select>
+          <div class="hint">Choose your preferred color scheme</div>
+        </div>
+
+        <div id="customColors" class="custom-colors" style="display: none">
+          <div class="form-group">
+            <label for="customBg">Background Color</label>
+            <input type="color" id="customBg" value="#2d2550" />
+          </div>
+          <div class="form-group">
+            <label for="customText">Text Color</label>
+            <input type="color" id="customText" value="#ffd016" />
+          </div>
+        </div>
+
+        <button type="submit" id="saveBtn">Save Settings</button>
+        <div id="status" class="status"></div>
+      </form>
+
+      <div id="pricingTable">
+        <div class="pricing-container">
+          <h3>OpenAI Model Pricing (per 1M tokens)</h3>
+          <table class="pricing-table">
+            <thead>
+              <tr>
+                <th>Model</th>
+                <th>Input</th>
+                <th>Cached Input</th>
+                <th>Output</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="frontier-model">
+                <td><strong>gpt-5</strong></td>
+                <td>$1.25</td>
+                <td>$0.125</td>
+                <td>$10.00</td>
+              </tr>
+              <tr class="frontier-model">
+                <td><strong>gpt-5-mini</strong></td>
+                <td>$0.25</td>
+                <td>$0.025</td>
+                <td>$2.00</td>
+              </tr>
+              <tr class="frontier-model">
+                <td><strong>gpt-5-nano</strong></td>
+                <td>$0.05</td>
+                <td>$0.005</td>
+                <td>$0.40</td>
+              </tr>
+              <tr class="frontier-model">
+                <td><strong>gpt-5-pro</strong></td>
+                <td>$15.00</td>
+                <td>-</td>
+                <td>$120.00</td>
+              </tr>
+              <tr class="frontier-model">
+                <td><strong>gpt-4.1</strong></td>
+                <td>$2.00</td>
+                <td>$0.50</td>
+                <td>$8.00</td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="pricing-note">
+            <strong>Highlighted models</strong> are the recommended frontier
+            models. Prices shown are per 1 million tokens.
+          </div>
         </div>
       </div>
-
-      <button type="submit" id="saveBtn">Save Settings</button>
-      <div id="status" class="status"></div>
-    </form>
+    </div>
 
     <script src="providers.js"></script>
     <script src="settings.js"></script>
