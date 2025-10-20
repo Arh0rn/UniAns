@@ -2,7 +2,7 @@
     "manifest_version": 3,
     "name": "UniAns Hotkey Answer",
     "short_name": "UniAns",
-    "version": "1.3.0",
+    "version": "1.4.1",
     "description": "Get instant AI-powered answers for selected text using OpenAI. Just select text and press Alt+Shift+X.",
     "author": "A",
     "homepage_url": "https://github.com/Arh0rn/UniAns",
@@ -13,7 +13,7 @@
         "128": "icons/icon128.png"
     },
     "action": {
-        "default_popup": "popup.html",
+        "default_popup": "src/popup.html",
         "default_title": "Get AI Answer",
         "default_icon": {
             "16": "icons/icon16.png",
@@ -21,7 +21,7 @@
             "128": "icons/icon128.png"
         }
     },
-    "options_page": "settings.html",
+    "options_page": "src/settings.html",
     "permissions": [
         "activeTab",
         "scripting",
