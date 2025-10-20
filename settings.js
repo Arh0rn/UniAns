@@ -6,7 +6,7 @@ const DEFAULT_SETTINGS = {
     geminiApiKey: "",
     geminiModel: "gemini-1.5-flash",
     temperature: 0.7,
-    maxTokens: 150,
+    maxTokens: 1000,
     promptPrefix: "answer shortly A B C D: ",
     theme: "dark",
     customBg: "#2d2550",
