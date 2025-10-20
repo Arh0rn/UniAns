@@ -69,66 +69,14 @@ class OpenAIProvider extends LLMProvider {
         return !!this.settings.openaiApiKey;
     }
 }
-
 // Gemini Provider
 class GeminiProvider extends LLMProvider {
     async getAnswer(prompt) {
-        const url = `https://generativelanguage.googleapis.com/v1beta/models/${this.settings.geminiModel}:generateContent?key=${this.settings.geminiApiKey}`;
-
-        if (!this.settings.geminiApiKey) {
-            return "Please set your Gemini API key in settings";
-        }
-
-        console.log("=== Gemini API Call ===");
-        console.log("Model:", this.settings.geminiModel);
-        console.log("Prompt:", this.settings.promptPrefix + prompt);
-
-        try {
-            const response = await fetch(url, {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify({
-                    contents: [
-                        {
-                            parts: [
-                                {
-                                    text: this.settings.promptPrefix + prompt,
-                                },
-                            ],
-                        },
-                    ],
-                    generationConfig: {
-                        temperature: this.settings.temperature,
-                        maxOutputTokens: this.settings.maxTokens,
-                    },
-                }),
-            });
-
-            if (!response.ok) {
-                const errorData = await response.json();
-                console.error("API Error:", errorData);
-                return `Gemini Error: ${
-                    errorData.error?.message || "Unknown error"
-                }`;
-            }
-
-            const data = await response.json();
-            console.log("Response:", data);
-
-            if (data?.candidates?.[0]?.content?.parts?.[0]?.text) {
-                return data.candidates[0].content.parts[0].text;
-            }
-            return "Unexpected response format";
-        } catch (error) {
-            console.error("Fetch Error:", error);
-            return "Connection error. Check your internet.";
-        }
+        return "not implemented for now";
     }
 
     validateSettings() {
-        return !!this.settings.geminiApiKey;
+        return false;
     }
 }
 

@@ -79,13 +79,16 @@ function applyTheme(themeName, customBg, customText) {
 function toggleProviderSettings(provider) {
     const openaiSettings = document.getElementById("openaiSettings");
     const geminiSettings = document.getElementById("geminiSettings");
+    const geminiWarning = document.getElementById("geminiWarning");
 
     if (provider === "openai") {
         openaiSettings.style.display = "block";
         geminiSettings.style.display = "none";
+        geminiWarning.style.display = "none";
     } else if (provider === "gemini") {
         openaiSettings.style.display = "none";
         geminiSettings.style.display = "block";
+        geminiWarning.style.display = "block";
     }
 }
 
@@ -93,6 +96,10 @@ async function loadSettings() {
     const settings = await chrome.storage.sync.get(DEFAULT_SETTINGS);
 
     document.getElementById("provider").value = settings.provider;
+    if (settings.provider === "gemini") {
+        const geminiWarning = document.getElementById("geminiWarning");
+        geminiWarning.style.display = "block";
+    }
     document.getElementById("openaiApiKey").value = settings.openaiApiKey;
     document.getElementById("openaiModel").value = settings.openaiModel;
     document.getElementById("geminiApiKey").value = settings.geminiApiKey;
