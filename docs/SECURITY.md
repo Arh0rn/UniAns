@@ -6,8 +6,7 @@ I am committed to ensuring the security of my extension. Security updates are ap
 
 | Version      | Supported          |
 | ------------ | ------------------ |
-| 1.4.1        | :white_check_mark: |
-| 1.4.0        | :x:                |
+| 1.4.2        | :white_check_mark: |
 | All previous | :x:                |
 
 We recommend all users stay on the latest version of the extension for the best features and security.

@@ -47,11 +47,25 @@ A Chrome extension that uses OpenAI's API to quickly get answers for selected te
 2. Find "UniS Hotkey Answer"
 3. Set your preferred shortcut
 
-## Privacy
+## Privacy & Data Collection
 
--   Your API keys are stored locally in Chrome's sync storage
--   No data is sent anywhere except directly to your chosen AI provider's API
--   The extension only accesses the currently selected text
+**We do NOT collect any data. Period.**
+
+-   🔒 **Zero data collection**: This extension does not collect, store, or transmit any user data to our servers (because we don't have any servers!)
+-   🔑 **Your API keys stay local**: API keys are stored only in Chrome's sync storage on your device
+-   🎯 **Direct API calls**: Your selected text is sent directly to your chosen AI provider's API (OpenAI) - we never see it
+-   👁️ **No tracking**: No analytics, no telemetry, no tracking of any kind
+-   📝 **Open source**: All code is public and auditable on GitHub
+
+**What the extension accesses:**
+
+-   Only the text you select on a webpage (when you trigger the extension)
+-   Your settings stored locally in Chrome
+
+**Where your data goes:**
+
+-   Selected text → Directly to your API provider (using YOUR API key)
+-   That's it. We're not in the middle.
 
 ## Supported AI Providers
 
