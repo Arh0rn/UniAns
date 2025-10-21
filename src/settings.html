@@ -175,26 +175,22 @@
           <div class="form-group">
             <label for="openaiModel">Model</label>
             <select id="openaiModel">
+              <option value="gpt-4.1-nano">GPT-4.1 nano - Fastest</option>
+              <option value="gpt-4.1">GPT-4.1 - Fast</option>
               <option value="gpt-5">
                 GPT-5 - Best for coding and agentic tasks
               </option>
-              <option value="gpt-5-mini">
-                GPT-5 Mini - Faster & cost-efficient
-              </option>
+              <option value="gpt-5-mini">GPT-5 Mini - faster than GPT-5</option>
               <option value="gpt-5-nano">
-                GPT-5 Nano - Fastest & most cost-efficient
+                GPT-5 Nano - faster than GPT-5 Mini
               </option>
               <option value="gpt-5-pro">
                 GPT-5 Pro - Smarter and more precise
-              </option>
-              <option value="gpt-4.1">
-                GPT-4.1 - Smartest non-reasoning model
               </option>
               <option value="custom">Custom Model (enter manually)</option>
             </select>
             <div class="hint">Frontier models recommended for most tasks</div>
           </div>
-
           <div class="form-group" id="customModelGroup" style="display: none">
             <label for="customModel">Custom Model Name</label>
             <input
@@ -355,6 +351,12 @@
                 <td>$2.00</td>
                 <td>$0.50</td>
                 <td>$8.00</td>
+              </tr>
+              <tr class="frontier-model">
+                <td><strong>gpt-4.1-nano</strong></td>
+                <td>$0.20</td>
+                <td>$0.05</td>
+                <td>$0.80</td>
               </tr>
             </tbody>
           </table>

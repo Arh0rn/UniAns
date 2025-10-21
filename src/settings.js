@@ -1,11 +1,11 @@
 const DEFAULT_SETTINGS = {
     provider: "openai",
     openaiApiKey: "",
-    openaiModel: "gpt-5-mini",
+    openaiModel: "gpt-4.1-nano",
     customModel: "",
     geminiApiKey: "",
     geminiModel: "gemini-1.5-flash",
-    temperature: 0.7,
+    temperature: 1,
     maxTokens: 1000,
     promptPrefix: "answer shortly A B C D: ",
     theme: "dark",
